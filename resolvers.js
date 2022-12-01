@@ -24,6 +24,14 @@ const resolvers = {
       await newTask.save();
       console.log(newTask);
       return newTask;
+    },
+    deleteTask: async(_, {id}) =>{
+      const task = await Task.findByIdAndDelete(id);
+      return task;
+    },
+    updateTask: async(_, {id, title, description}) => {
+      const taskModified = await Task.findByIdAndUpdate(id, {title, description});
+      return taskModified;
     }
   }
   
