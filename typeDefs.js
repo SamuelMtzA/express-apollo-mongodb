@@ -9,7 +9,8 @@ const typeDefs = gql`
 
   type Query {
     hello: String
-    getallTasks: [Task]
+    getallTasks: [Task],
+    getTask(id: ID): Task
   }
 
   type Mutation {
