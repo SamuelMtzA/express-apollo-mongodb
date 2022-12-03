@@ -7,6 +7,11 @@ const typeDefs = gql`
     description: String
   }
 
+  input InputTask {
+    title: String
+    description: String
+  }
+
   type Query {
     hello: String
     getallTasks: [Task],
@@ -14,9 +19,9 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createTask(title: String, description: String): Task,
-    deleteTask(id: ID): Task
-    updateTask(id: ID, title: String, description: String): Task
+    createTask(task: InputTask!): Task,
+    deleteTask(id: ID!): String
+    updateTask(id: ID!, task: InputTask): Task
   }
 `;
 

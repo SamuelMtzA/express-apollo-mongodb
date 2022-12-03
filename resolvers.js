@@ -19,7 +19,7 @@ const resolvers = {
   },
   Mutation: {
     createTask: async(_, args) => {
-      const {title, description} = args;
+      const {title, description} = args.task;
       const newTask = new Task({title, description});
       await newTask.save();
       console.log(newTask);
@@ -27,10 +27,13 @@ const resolvers = {
     },
     deleteTask: async(_, {id}) =>{
       const task = await Task.findByIdAndDelete(id);
-      return task;
+      return `Task with id ${task.id} and title ${task.title} deleted`;
     },
-    updateTask: async(_, {id, title, description}) => {
-      const taskModified = await Task.findByIdAndUpdate(id, {title, description});
+    updateTask: async(_, {task, id}) => {
+      const taskModified = await Task.findByIdAndUpdate(id, 
+      {
+        $set: task
+      }, {new: true});
       return taskModified;
     }
   }
