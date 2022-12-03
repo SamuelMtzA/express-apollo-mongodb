@@ -1,5 +1,6 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
+require('dotenv').config();
 
 const {typeDefs} = require('./typeDefs');
 const {resolvers} = require('./resolvers');
@@ -26,8 +27,8 @@ const start = async() => {
     res.status(404).send('Page not found');
   })
 
-  app.listen(3000, () =>{
-    console.log('Server started on port 3000');
+  app.listen(process.env.PORT || 3000, () =>{
+    console.log('Server started on port ' + process.env.PORT);
   })
 }
 
